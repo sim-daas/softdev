@@ -6,6 +6,7 @@ print(pd.show_versions())
 
 import numpy as np
 
+# 4
 data = {'animal': ['cat', 'cat', 'snake', 'dog', 'dog', 'cat', 'snake', 'cat', 'dog', 'dog'],
         'age': [2.5, 3, 0.5, np.nan, 5, 2, 4.5, np.nan, 7, 3],
         'visits': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
@@ -14,12 +15,24 @@ data = {'animal': ['cat', 'cat', 'snake', 'dog', 'dog', 'cat', 'snake', 'cat', '
 labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
 
 df = pd.DataFrame(data, labels)
+
+# 5
 df.info()
 
+# 6
 df.head(3)
 
-df[['animal', 'age']].iloc[[3, 4, 8]]
+# 7
 
-print(df.visits > 1)
-df[df.visits > 1]
-df[labels]
+
+
+
+
+
+
+
+
+
+
+
+
