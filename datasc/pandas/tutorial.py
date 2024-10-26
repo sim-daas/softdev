@@ -52,6 +52,8 @@ df.loc[0] = "Tuesday", "asasa",30
 df.head()
 
 
+# Using opd to download and use online csv datasets directly
+
 import opendatasets as opd
 
 opd.download("https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot/")
