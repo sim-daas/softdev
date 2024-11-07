@@ -6,8 +6,8 @@ print(pd.show_versions())
 
 import numpy as np
 
-# 4
-data = {'animal': ['cat', 'cat', 'snake', 'dog', 'dog', 'cat', 'snake', 'cat', 'dog', 'dog'],
+
+data = {
         'age': [2.5, 3, 0.5, np.nan, 5, 2, 4.5, np.nan, 7, 3],
         'visits': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
         'priority': ['yes', 'yes', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no']}
@@ -23,14 +23,15 @@ df.info()
 df.head(3)
 
 # 7
+df[["animal", 'age']]
 
+# 8
+df.iloc[[3,4,8], 0:2]
 
+# 9
+df[df['visits'] > 3]
 
-
-
-
-
-
+# 10
 
 
 

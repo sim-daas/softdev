@@ -65,6 +65,38 @@ home_data = pd.read_csv("home-data-for-ml-course/train.csv")
 home_data.head()
 
 
+# adding removing columns
+
+df.head()
+
+df["Price"] = 5
+df.head()
+
+df["newprice"] = np.where(df["Coffee Type"] == "Latte", 3.99, 4.99)
+df.head()
+
+df.drop(columns="Price", inplace=True)
+df.rename(columns={"newprice":"Price"}, inplace=True)
+df.head()
+
+bios.head()
+filtered_athletes = bios.loc[bios["born_country"].isin(["IND", "GBR"]) & (bios["height_cm"] > 180)]
+filtered_athletes.head()
+
+
+bios["weight_category"] = bios["weight_kg"].apply(lambda x: "light" if x < 60 else "medium" if x < 80 else "heavy")
+bios.head()
+
+
+
+
+
+
+
+
+
+
+
 
 
 
