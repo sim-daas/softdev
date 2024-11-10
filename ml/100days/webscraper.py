@@ -22,17 +22,23 @@ print("duration ", page.find_all('div', class_='film-detail')[0].find('span', cl
 
 for i in range(0, len(page.find_all('div', class_='film-detail'))):
     if page.find_all('div', class_='film-detail')[i].find("span", class_='float-right fdi-type').text.split() == ['Movie']:
-        print("movie name ", i.find('h2').text.strip())
-        print("duration ", i.find('span', class_='fdi-item fdi-duration').text.split()[0])
+        print("movie name ", page.find_all('div', class_='film-detail')[i].find('h2').text.strip())
+        print("duration ", page.find_all('div', class_='film-detail')[i].find('span', class_='fdi-item fdi-duration').text.split()[0])
         add = page.find_all('div', class_='film-poster')[i].find('a')['href']
         flmurl = "https://hurawatch.cc" + add
         flmpage = requests.get(flmurl, headers=headers)
         flmpage = flmpage.text
         flmpage = bs(flmpage, 'html.parser')
-        flmpage.find_all('span', class_='item mr-3')[1].text.split()
+        print(flmpage.find_all('span', class_='item mr-3')[1].text.split())
     elif page.find_all('div', class_='film-detail')[i].find('span', class_='float-right fdi-type').text.split() == ['TV']:
-        print("series name ", i.find('h2').text.strip())
-        print("season ", i.find('span', class_= "fdi-item").text.strip())
+        print("series name ", page.find_all('div', class_='film-detail')[i].find('h2').text.strip())
+        print("season ", page.find_all('div', class_='film-detail')[i].find('span', class_= "fdi-item").text.strip())
+        add = page.find_all('div', class_='film-poster')[i].find('a')['href']
+        flmurl = "https://hurawatch.cc" + add
+        flmpage = requests.get(flmurl, headers=headers)
+        flmpage = flmpage.text
+        flmpage = bs(flmpage, 'html.parser')
+        print(flmpage.find_all('span', class_='item mr-3')[1].text.split())
     else:
         pass
     print('\n')
