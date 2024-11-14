@@ -61,7 +61,6 @@ df.drop(columns=['Index'], inplace=True)
 df.drop(index=0, inplace=True)
 df['Name'] = df['Name'].replace('\n', '', regex=True) 
 df.shape 
-df.head(5) 
     
 
  
