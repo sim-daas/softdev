@@ -19,7 +19,7 @@ filtered_divs = [div for div in page.find_all('div', class_="sub") if 'font-size
 filtered_divs[0].text.split()[-1]
 
 
-for i in range(1, 88):
+for i in range(1, 2):
     print(i)
     if i < 10:
         url=f"https://www.screener.in/company/compare/0000000{i}/?page=1"
@@ -35,7 +35,7 @@ for i in range(1, 88):
         filtered_divs = page.find_all('div', class_="sub")
         nump=1
     #nump = int(page.find_all('div', class_="flex-baseline options")[0].find_all('a')[len(page.find_all('div', class_="flex-baseline options")[0].find_all('a'))-2].text)
-    for j in range(1, nump+1):
+    for j in range(1, nump):
         if i < 10:
             url=f"https://www.screener.in/company/compare/0000000{i}/?page={j}"
         else:
@@ -45,11 +45,24 @@ for i in range(1, 88):
         page = bs(page, 'html.parser')
         data = []
         for r in range(0, len(page.find_all('tr'))):
-            if page.find_all('tr')[r].find_all('td'):
-                for m in range(0, len(data.append(page.find_all('tr')[r].find_all('td')))):
-                    data.append(page.find_all('tr')[r].find_all('td')[m].text)
+            data.append(page.find_all('tr')[r].find_all('td'))
         print(data)
     time.sleep(5)
+    
+df = pd.DataFrame(0, index=range(0, len(data)),columns=['Index', 'Name','CMP', 'PE', 'Market Cap', 'Dividend Yield', 'Net Profit Last Quarter', 'Quaterly Profit Growth', 'Sales Latest Quarter','Quaterly Sales Growth', 'Return on Campital Employment'])
+
+for i in range(0, len(data)):   
+    for j in range(0, len(data[i])):
+        df.iloc[i, j] = data[i][j].text
+        print(data[i][j].text)
+        
+        
+df.drop(columns=['Index'], inplace=True)
+df.drop(index=0, inplace=True)
+df['Name'] = df['Name'].replace('\n', '', regex=True) 
+df.shape 
+df.head(5) 
+    
 
  
 
