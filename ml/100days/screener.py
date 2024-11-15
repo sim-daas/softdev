@@ -59,13 +59,12 @@ for i in range(1, 88):
 
 df.drop(columns=['Index'], inplace=True)
 df['Name'] = df['Name'].replace('\n', '', regex=True) 
+df.drop_duplicates(subset=['Name'], keep='first', inplace=True) 
 df.shape 
-df 
+
+df.sample(5)
 
 df.to_csv('screener.csv', index=False) 
-
-
-
 
 
 
