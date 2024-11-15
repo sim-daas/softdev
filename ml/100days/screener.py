@@ -48,7 +48,6 @@ for i in range(1, 88):
 
         for i in range(0, len(data)):
             for j in range(0, len(data[i])):
-                #df.iloc[i+x, j] = data[i][j].text
                 df.loc[i+x, col[j]] = data[i][j].text
         x = len(df)
         
@@ -65,6 +64,3 @@ df.shape
 df.sample(5)
 
 df.to_csv('screener.csv', index=False) 
-
-
-
