@@ -62,7 +62,7 @@ df['Name'] = df['Name'].replace('\n', '', regex=True)
 df.shape 
 df 
 
- 
+df.to_csv('screener.csv', index=False) 
 
 
 
