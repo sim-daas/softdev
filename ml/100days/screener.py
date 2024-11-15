@@ -14,7 +14,7 @@ x=0
 
 # WEB SCRAPING
 
-for i in range(1, 11):
+for i in range(1, 88):
     print(i)
     if i < 10:
         url=f"https://www.screener.in/company/compare/0000000{i}/?page=1"
@@ -58,7 +58,6 @@ for i in range(1, 11):
 # CLEANING
 
 df.drop(columns=['Index'], inplace=True)
-df.drop(index=0, inplace=True)
 df['Name'] = df['Name'].replace('\n', '', regex=True) 
 df.shape 
 df 
