@@ -61,6 +61,10 @@ df['Name'] = df['Name'].replace('\n', '', regex=True)
 df.drop_duplicates(subset=['Name'], keep='first', inplace=True) 
 df.shape 
 
-df.sample(5)
+df = pd.read_csv('./dataset/screener.csv')
+
+for i in range(2, len(col)):
+    df[df[col[i]] == ''][col[i]] = df[col[i]].mean()
+
 
 df.to_csv('screener.csv', index=False) 
