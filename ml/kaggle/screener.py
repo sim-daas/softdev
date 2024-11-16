@@ -63,9 +63,9 @@ df.shape
 
 df = pd.read_csv('./dataset/screener.csv')
 df.head()
-
+df.info()
 df.isna().sum()
-
+df = df.round(2)
 for i in range(2, len(col)):
     df.loc[df[col[i]].isna(), col[i]] = round(df[col[i]].mean(), 2)
     
