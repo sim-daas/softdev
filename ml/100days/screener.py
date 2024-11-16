@@ -62,9 +62,11 @@ df.drop_duplicates(subset=['Name'], keep='first', inplace=True)
 df.shape 
 
 df = pd.read_csv('./dataset/screener.csv')
+df.head()
+
+df.isna().sum()
 
 for i in range(2, len(col)):
-    df[df[col[i]] == ''][col[i]] = df[col[i]].mean()
-
-
+    df.loc[df[col[i]].isna(), col[i]] = df[col[i]].mean()
+    
 df.to_csv('screener.csv', index=False) 
