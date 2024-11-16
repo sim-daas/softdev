@@ -67,6 +67,6 @@ df.head()
 df.isna().sum()
 
 for i in range(2, len(col)):
-    df.loc[df[col[i]].isna(), col[i]] = df[col[i]].mean()
+    df.loc[df[col[i]].isna(), col[i]] = round(df[col[i]].mean(), 2)
     
 df.to_csv('./dataset/screener.csv', index=False) 
