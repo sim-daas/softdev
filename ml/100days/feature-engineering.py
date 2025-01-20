@@ -6,17 +6,19 @@ from sklearn.preprocessing import MinMaxScaler
 
 # 1. Standardization
 
-df = pd.read_csv('./data/ads.csv')
+df = pd.read_csv('data/ads.csv')
+df = df.iloc[:, 2:]
 df.head()
 
+scaler = StandardScaler()
 
+scaler.fit(df)
 
+df_scaled = scaler.transform(df)
 
+df_scaled = pd.DataFrame(df_scaled, columns=df.columns)
 
-
-
-
-
+df_scaled.head()
 
 
 
