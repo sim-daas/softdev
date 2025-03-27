@@ -103,7 +103,13 @@ def simple_convert(num, from_base, to_base, result=""):
     
     return simple_convert(num // to_base, from_base, to_base, char + result)
 
-# Main code to test functions
+
+
+print(is_armstrong(int(input("Enter a number: "))))
+print(is_palindrome(input("Enter a string: ")))
+print(ms_to_hours(int(input("Enter a number of milliseconds: "))))
+print(ms_to_minutes_and_seconds(int(input("Enter a number of milliseconds: "))))
+
 s = "Welcome to Python"
 pos = find_p(s)
 print(f"Position of 'P' in '{s}': {pos}")
@@ -134,8 +140,3 @@ print(f"{bin_num} in base 2 is {dec_result} in base 10")
 dec_num = 28
 hex_result = simple_convert(dec_num, 10, 16)
 print(f"{dec_num} in base 10 is {hex_result} in base 16")
-
-print(is_armstrong(int(input("Enter a number: "))))
-print(is_palindrome(input("Enter a string: ")))
-print(ms_to_hours(int(input("Enter a number of milliseconds: "))))
-print(ms_to_minutes_and_seconds(int(input("Enter a number of milliseconds: "))))
