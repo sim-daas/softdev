@@ -1,16 +1,13 @@
+def is_armstrong(n):
+    if not isinstance(n, int) or n < 100 or n >= 1000:
+        return False
+    sum_cubes = sum(int(d) ** 3 for d in str(n))
+    return sum_cubes == n
+
+
 def ms_to_hours(ms):
     return ms // 3600000
 
-
-def ms_to_minutes_and_seconds(ms):
-    minutes = ms // 60000
-    seconds = (ms % 60000) / 1000
-    return f"{minutes} minutes, {seconds} seconds"
-
-
-def is_palindrome(s):
-    cleaned_s = ''.join(c.lower() for c in s if c.isalnum())
-    return cleaned_s == cleaned_s[::-1]
 
 def find_p(s):
     for i in range(len(s)):
@@ -103,13 +100,7 @@ def simple_convert(num, from_base, to_base, result=""):
     
     return simple_convert(num // to_base, from_base, to_base, char + result)
 
-
-
-print(is_armstrong(int(input("Enter a number: "))))
-print(is_palindrome(input("Enter a string: ")))
-print(ms_to_hours(int(input("Enter a number of milliseconds: "))))
-print(ms_to_minutes_and_seconds(int(input("Enter a number of milliseconds: "))))
-
+# Main code to test functions
 s = "Welcome to Python"
 pos = find_p(s)
 print(f"Position of 'P' in '{s}': {pos}")
@@ -140,3 +131,19 @@ print(f"{bin_num} in base 2 is {dec_result} in base 10")
 dec_num = 28
 hex_result = simple_convert(dec_num, 10, 16)
 print(f"{dec_num} in base 10 is {hex_result} in base 16")
+
+def ms_to_minutes_and_seconds(ms):
+    minutes = ms // 60000
+    seconds = (ms % 60000) / 1000
+    return f"{minutes} minutes, {seconds} seconds"
+
+
+def is_palindrome(s):
+    cleaned_s = ''.join(c.lower() for c in s if c.isalnum())
+    return cleaned_s == cleaned_s[::-1]
+
+
+print(is_armstrong(int(input("Enter a number: "))))
+print(is_palindrome(input("Enter a string: ")))
+print(ms_to_hours(int(input("Enter a number of milliseconds: "))))
+print(ms_to_minutes_and_seconds(int(input("Enter a number of milliseconds: "))))
