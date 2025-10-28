@@ -65,12 +65,16 @@ y_pred_entropy = dt_entropy.predict(X_test)
 print(f"\nTree Depth: {dt_entropy.get_depth()}")
 print(f"Number of Leaves: {dt_entropy.get_n_leaves()}")
 
-accuracy_entropy = accuracy_score(y_test, y_pred_entropy)
-print(f"Accuracy: {accuracy_entropy:.8f}")
-
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_entropy,
                           target_names=['Not Survived', 'Survived']))
+accuracy_entropy = accuracy_score(y_test, y_pred_entropy)
+print(f"Accuracy: {accuracy_entropy:.8f}")
+
+cm_entropy = confusion_matrix(y_test, y_pred_entropy)
+print("\nConfusion Matrix:")
+print(cm_entropy)
+
 
 print("MODEL 2: DECISION TREE WITH GINI INDEX")
 
@@ -88,12 +92,17 @@ y_pred_gini = dt_gini.predict(X_test)
 print(f"\nTree Depth: {dt_gini.get_depth()}")
 print(f"Number of Leaves: {dt_gini.get_n_leaves()}")
 
-accuracy_gini = accuracy_score(y_test, y_pred_gini)
-print(f"\nAccuracy: {accuracy_gini:.4f}")
-
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_gini,
                           target_names=['Not Survived', 'Survived']))
+
+accuracy_gini = accuracy_score(y_test, y_pred_gini)
+print(f"\nAccuracy: {accuracy_gini:.4f}")
+
+cm_gini = confusion_matrix(y_test, y_pred_gini)
+print("\nConfusion Matrix:")
+print(cm_gini)
+
 
 comparison_df = pd.DataFrame({
     'Metric': ['Accuracy', 'Tree Depth', 'Number of Leaves'],
@@ -117,6 +126,22 @@ elif accuracy_gini > accuracy_entropy:
     print(f"\nGini Index performs better with {(accuracy_gini - accuracy_entropy)*100:.2f}% higher accuracy")
 else:
     print("\nBoth criteria perform equally well")
+
+
+print("FEATURE IMPORTANCE")
+feat_imp_df = pd.DataFrame({
+    'Feature': features,
+    'Entropy': dt_entropy.feature_importances_,
+    'Gini': dt_gini.feature_importances_
+})
+feat_imp_df = feat_imp_df.sort_values('Entropy', ascending=False)
+print("\n", feat_imp_df.to_string(index=False))
+
+
+
+
+
+
 
 
 
