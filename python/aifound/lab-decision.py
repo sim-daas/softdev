@@ -53,7 +53,7 @@ print("DECISION TREE WITH INFORMATION GAIN (ENTROPY)")
 
 dt_entropy = DecisionTreeClassifier(
     criterion='entropy',
-    max_depth=8,
+    max_depth=3,
     min_samples_split=22,
     min_samples_leaf=9,
     random_state=42
@@ -80,7 +80,7 @@ print("MODEL 2: DECISION TREE WITH GINI INDEX")
 
 dt_gini = DecisionTreeClassifier(
     criterion='gini',
-    max_depth=8,
+    max_depth=3,
     min_samples_split=22,
     min_samples_leaf=9,
     random_state=42
@@ -136,6 +136,102 @@ feat_imp_df = pd.DataFrame({
 })
 feat_imp_df = feat_imp_df.sort_values('Entropy', ascending=False)
 print("\n", feat_imp_df.to_string(index=False))
+
+print("GENERATING VISUALIZATIONS")
+
+fig = plt.figure(figsize=(20, 16))
+
+plt.subplot(3, 2, 1)
+sns.heatmap(cm_entropy, annot=True, fmt='d', cmap='Blues',
+            xticklabels=['Not Survived', 'Survived'],
+            yticklabels=['Not Survived', 'Survived'])
+plt.title('Confusion Matrix - Information Gain (Entropy)', fontsize=14, fontweight='bold')
+plt.ylabel('Actual')
+plt.xlabel('Predicted')
+
+plt.subplot(3, 2, 2)
+sns.heatmap(cm_gini, annot=True, fmt='d', cmap='Greens',
+            xticklabels=['Not Survived', 'Survived'],
+            yticklabels=['Not Survived', 'Survived'])
+plt.title('Confusion Matrix - Gini Index', fontsize=14, fontweight='bold')
+plt.ylabel('Actual')
+plt.xlabel('Predicted')
+
+plt.subplot(3, 2, 3)
+x = np.arange(len(features))
+width = 0.35
+plt.bar(x - width/2, feat_imp_df['Entropy'], width, label='Entropy', alpha=0.8)
+plt.bar(x + width/2, feat_imp_df['Gini'], width, label='Gini', alpha=0.8)
+plt.xlabel('Features', fontweight='bold')
+plt.ylabel('Importance', fontweight='bold')
+plt.title('Feature Importance Comparison', fontsize=14, fontweight='bold')
+plt.xticks(x, feat_imp_df['Feature'], rotation=45)
+plt.legend()
+plt.grid(axis='y', alpha=0.3)
+
+plt.subplot(3, 2, 4)
+models = ['Information Gain\n(Entropy)', 'Gini Index']
+accuracies = [accuracy_entropy, accuracy_gini]
+colors = ['#3598db', '#1ecc71']
+bars = plt.bar(models, accuracies, color=colors, alpha=0.8, edgecolor='black')
+plt.ylabel('Accuracy', fontweight='bold')
+plt.title('Model Accuracy Comparison', fontsize=14, fontweight='bold')
+plt.ylim([0.7, 0.9])
+for bar in bars:
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2., height,
+             f'{height:.4f}', ha='center', va='bottom', fontweight='bold')
+plt.grid(axis='y', alpha=0.3)
+
+plt.subplot(3, 2, 5)
+plot_tree(dt_entropy,
+          feature_names=features,
+          class_names=['Not Survived', 'Survived'],
+          filled=True,
+          rounded=True,
+          fontsize=8)
+plt.title('Decision Tree - Information Gain (Entropy)', fontsize=14, fontweight='bold')
+
+plt.subplot(3, 2, 6)
+plot_tree(dt_gini,
+          feature_names=features,
+          class_names=['Not Survived', 'Survived'],
+          filled=True,
+          rounded=True,
+          fontsize=8)
+plt.title('Decision Tree - Gini Index', fontsize=14, fontweight='bold')
+
+plt.tight_layout()
+plt.show()
+
+fig, axes = plt.subplots(1, 2, figsize=(24, 12))
+
+plot_tree(dt_entropy,
+          feature_names=features,
+          class_names=['Not Survived', 'Survived'],
+          filled=True,
+          rounded=True,
+          fontsize=10,
+          ax=axes[0])
+axes[0].set_title('Decision Tree - Information Gain (Entropy)\n' +
+                  f'Depth: {dt_entropy.get_depth()}, Leaves: {dt_entropy.get_n_leaves()}, ' +
+                  f'Accuracy: {accuracy_entropy:.4f}',
+                  fontsize=14, fontweight='bold')
+
+plot_tree(dt_gini,
+          feature_names=features,
+          class_names=['Not Survived', 'Survived'],
+          filled=True,
+          rounded=True,
+          fontsize=10,
+          ax=axes[1])
+axes[1].set_title('Decision Tree - Gini Index\n' +
+                  f'Depth: {dt_gini.get_depth()}, Leaves: {dt_gini.get_n_leaves()}, ' +
+                  f'Accuracy: {accuracy_gini:.4f}',
+                  fontsize=14, fontweight='bold')
+
+plt.tight_layout()
+plt.show()
 
 
 
