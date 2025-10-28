@@ -54,8 +54,8 @@ print("DECISION TREE WITH INFORMATION GAIN (ENTROPY)")
 dt_entropy = DecisionTreeClassifier(
     criterion='entropy',
     max_depth=3,
-    min_samples_split=22,
-    min_samples_leaf=9,
+    min_samples_split=4,
+    min_samples_leaf=3,
     random_state=42
 )
 
