@@ -81,9 +81,9 @@ print("MODEL 2: DECISION TREE WITH GINI INDEX")
 dt_gini = DecisionTreeClassifier(
     criterion='gini',
     max_depth=3,
-    min_samples_split=22,
+    min_samples_split=2,
     min_samples_leaf=9,
-    random_state=42
+    random_state=40
 )
 
 dt_gini.fit(X_train, y_train)
